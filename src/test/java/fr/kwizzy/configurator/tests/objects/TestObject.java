@@ -5,6 +5,7 @@ import fr.kwizzy.configurator.Config;
 import java.util.Arrays;
 
 public class TestObject implements Config {
+
     public static TestObject instance = new TestObject();
 
     public String name = "yolo";

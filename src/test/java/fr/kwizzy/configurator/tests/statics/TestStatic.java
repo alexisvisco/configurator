@@ -9,10 +9,4 @@ public class TestStatic implements Config {
     public static String base = "ok";
     public static boolean ok = true;
 
-    public static void toStrings() {
-        System.out.println(name);
-        System.out.println(port);
-        System.out.println(base);
-        System.out.println(ok);
-    }
 }

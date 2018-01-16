@@ -7,7 +7,5 @@ public class Test {
         Configurator.registerStaticClasses("fr.kwizzy.configurator.tests.statics");
         Configurator.registerObjectClasses("fr.kwizzy.configurator.tests.objects");
         Configurator.load(true);
-        TestStatic.toStrings();
-        System.out.println(TestObject.instance.toString());
     }
 }
