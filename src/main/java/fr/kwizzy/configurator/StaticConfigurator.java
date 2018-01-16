@@ -107,4 +107,9 @@ public class StaticConfigurator implements IConfigurator {
             }
         }
     }
+
+    @Override
+    public void save() {
+        writeFileFromClass();
+    }
 }

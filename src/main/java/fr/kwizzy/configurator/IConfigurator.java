@@ -12,6 +12,8 @@ public interface IConfigurator {
 
     File directory();
 
+    void save();
+
     default File config() {
         return new File(directory().getPath() + File.separator + getConfigName() + ".json");
     }

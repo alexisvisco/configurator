@@ -84,8 +84,8 @@ Obviously if I modify the config and I start the objects / classes will get the 
 ```
 ```xml
 <dependency>
-	    <groupId>com.github.AlexisVisco</groupId>
-	    <artifactId>Configurator</artifactId>
-	    <version>10 chars of the latest commit</version>
-	</dependency>
+    <groupId>com.github.AlexisVisco</groupId>
+    <artifactId>Configurator</artifactId>
+    <version>10 chars of the latest commit</version>
+</dependency>
 ```

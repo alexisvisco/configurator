@@ -56,6 +56,14 @@ public class ObjectConfigurator implements IConfigurator {
         }
     }
 
+    @Override
+    public void save() {
+        try {
+            writeFileFromInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public Class getClassz() {

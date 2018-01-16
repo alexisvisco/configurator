@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Configurator {
 
@@ -61,6 +62,16 @@ public class Configurator {
                 System.out.println("Configurator load: " + e.getClassz().getSimpleName());
             e.load();
         });
+    }
+
+    public static void save(Class t)
+    {
+        configs.stream().filter(f -> f.getClassz() == t).forEach(IConfigurator::save);
+    }
+
+    public static void saveOnly(Predicate<IConfigurator> pre)
+    {
+        configs.stream().filter(pre).forEach(IConfigurator::save);
     }
 
 }
