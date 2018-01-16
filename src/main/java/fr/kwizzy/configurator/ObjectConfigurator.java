@@ -6,7 +6,6 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public class ObjectConfigurator implements IConfigurator {
 

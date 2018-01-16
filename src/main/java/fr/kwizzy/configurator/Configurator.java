@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class Configurator {
 
@@ -43,12 +42,16 @@ public class Configurator {
         registerClasses(packageName, StaticConfigurator::new);
     }
 
-    public static void registerStaticClass(Class<? extends Config> classz) {
-        configs.add(new StaticConfigurator(classz));
+    public static StaticConfigurator registerStaticClass(Class<? extends Config> classz) {
+        StaticConfigurator staticConfigurator = new StaticConfigurator(classz);
+        configs.add(staticConfigurator);
+        return staticConfigurator;
     }
 
-    public static void registerObjectClass(Class<? extends Config> classz) {
-        configs.add(new ObjectConfigurator(classz));
+    public static ObjectConfigurator registerObjectClass(Class<? extends Config> classz) {
+        ObjectConfigurator objectConfigurator = new ObjectConfigurator(classz);
+        configs.add(objectConfigurator);
+        return objectConfigurator;
     }
 
     public static void load(boolean debug)
