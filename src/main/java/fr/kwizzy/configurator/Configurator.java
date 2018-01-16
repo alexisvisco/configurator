@@ -28,6 +28,11 @@ public class Configurator {
         classes.forEach(e -> configs.add(fn.apply(e)));
     }
 
+    public static Optional<IConfigurator> getConfig(Class t)
+    {
+        return configs.stream().filter(e -> e.getClassz() == t).findFirst();
+    }
+
     public static void registerClass(IConfigurator cfg) {
         configs.add(cfg);
     }
