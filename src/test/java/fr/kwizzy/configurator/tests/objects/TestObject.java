@@ -12,7 +12,9 @@ public class TestObject implements Config {
     public int port = 9374;
     public String base = "ok";
     public boolean ok = true;
-    public String[] values = {"hello", "world", "im", "reliable"};
+    public boolean ok2 = true;
+    public boolean ok3 = false;
+    public String[] values = {"hello", "é&1234567è", "im", "reliable"};
 
     @Override
     public String toString() {

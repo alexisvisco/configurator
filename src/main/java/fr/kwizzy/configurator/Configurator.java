@@ -7,16 +7,13 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class Configurator {
 
-    private static List<IConfigurator> configs = new ArrayList<>();
+    static List<IConfigurator> configs = new ArrayList<>();
 
     public static void registerClasses(String packageName, Function<Class<? extends Config>, IConfigurator> fn) {
         List<ClassLoader> classLoadersList = new LinkedList<>();

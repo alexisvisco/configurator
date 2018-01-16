@@ -4,15 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Optional;
 
 class Util {
 
-    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    static Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     static Optional<JSONObject> getJsonFromFile(File f) {
         String content = null;
@@ -26,16 +25,16 @@ class Util {
     }
 
     static void writeInFile(JSONObject o, File f) {
-        try (FileWriter file = new FileWriter(f.getAbsolutePath())) {
-            file.write(o.toString(2));
+        try (OutputStreamWriter a = new OutputStreamWriter(new FileOutputStream(f), StandardCharsets.UTF_8)) {
+            a.write(o.toString(2));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     static void writeInFile(String o, File f) {
-        try (FileWriter file = new FileWriter(f.getAbsolutePath())) {
-            file.write(o);
+        try (OutputStreamWriter a = new OutputStreamWriter(new FileOutputStream(f), StandardCharsets.UTF_8)) {
+            a.write(o);
         } catch (IOException e) {
             e.printStackTrace();
         }
