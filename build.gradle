@@ -11,8 +11,8 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'org.json:json:20140107'
+    compile 'org.json:json:20171018'
     compile 'com.google.code.gson:gson:2.8.2'
-    compile 'org.reflections:reflections:0.9.11'
+    compile 'com.google.guava:guava:23.6-jre'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.3'
 }

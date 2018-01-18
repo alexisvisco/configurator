@@ -1,11 +1,7 @@
 package fr.kwizzy.configurator;
 
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
+import com.google.common.collect.ImmutableList;
+import com.google.common.reflect.ClassPath;
 
 import java.util.*;
 import java.util.function.Function;
@@ -16,16 +12,17 @@ public class Configurator {
     static List<IConfigurator> configs = new ArrayList<>();
 
     public static void registerClasses(String packageName, Function<Class<? extends Config>, IConfigurator> fn) {
-        List<ClassLoader> classLoadersList = new LinkedList<>();
-        classLoadersList.add(ClasspathHelper.contextClassLoader());
-        classLoadersList.add(ClasspathHelper.staticClassLoader());
-
-        Reflections reflections = new Reflections(new ConfigurationBuilder()
-                .setScanners(new SubTypesScanner(false), new ResourcesScanner())
-                .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
-                .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(packageName))));
-        Set<Class<? extends Config>> classes = reflections.getSubTypesOf(Config.class);
-        classes.forEach(e -> configs.add(fn.apply(e)));
+        try {
+            ClassPath from = ClassPath.from(Thread.currentThread().getContextClassLoader());
+            ImmutableList<ClassPath.ClassInfo> c = from.getTopLevelClassesRecursive(packageName).asList();
+            c.forEach(e -> {
+                Class<?> cl = e.load();
+                if (Arrays.stream(cl.getInterfaces()).anyMatch(x -> x == Config.class))
+                    configs.add(fn.apply((Class<? extends Config>) cl));
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static Optional<IConfigurator> getConfig(Class t)
